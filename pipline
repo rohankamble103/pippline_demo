@@ -1,0 +1,21 @@
+pipeline {
+    agent { node 'node3'}
+
+    stages {
+        stage('Fething Code') {
+            steps {
+                git branch: 'main', url: 'https://github.com/rohankamble103/pippline_demo.git'
+            }
+        }
+        stage('Install Apache2') {
+            steps {
+                sh 'sudo apt install apache2 -y'
+            }
+        }
+        stage('Deploying') {
+            steps {
+                sh 'sudo cp -R * /var/www/html/'
+            }
+        }
+    }
+}
